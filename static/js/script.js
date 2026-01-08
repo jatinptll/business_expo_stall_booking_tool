@@ -219,7 +219,7 @@ function renderMap() {
     exitGap1.textContent = 'E. EXIT';
     exitGap1.style.gridColumn = '1';
     exitGap1.style.gridRow = '20'; // Between 6 & 7
-    exitGap1.style.fontSize = '0.5rem';
+    exitGap1.style.fontSize = '1rem';
     exitGap1.style.background = 'transparent';
     exitGap1.style.color = 'black';
     exitGap1.style.border = 'none';
@@ -230,7 +230,7 @@ function renderMap() {
     exitGap2.textContent = 'E. EXIT';
     exitGap2.style.gridColumn = '1';
     exitGap2.style.gridRow = '11'; // Between 14 & 15
-    exitGap2.style.fontSize = '0.5rem';
+    exitGap2.style.fontSize = '1rem';
     exitGap2.style.background = 'transparent';
     exitGap2.style.color = 'black';
     exitGap2.style.border = 'none';
@@ -241,7 +241,7 @@ function renderMap() {
     exitGap3.textContent = 'E. EXIT';
     exitGap3.style.gridColumn = '9';
     exitGap3.style.gridRow = '10'; // Between 105 & 106
-    exitGap3.style.fontSize = '0.5rem';
+    exitGap3.style.fontSize = '1rem';
     exitGap3.style.background = 'transparent';
     exitGap3.style.color = 'black';
     exitGap3.style.border = 'none';
@@ -252,7 +252,7 @@ function renderMap() {
     exitGap4.textContent = 'E. EXIT';
     exitGap4.style.gridColumn = '9';
     exitGap4.style.gridRow = '19'; // Between 113 & 114
-    exitGap4.style.fontSize = '0.5rem';
+    exitGap4.style.fontSize = '1rem';
     exitGap4.style.background = 'transparent';
     exitGap4.style.color = 'black';
     exitGap4.style.border = 'none';

@@ -1117,3 +1117,9 @@ body {
     font-size: 1.5rem; /* ~24px */
     font-weight: 800;  /* Bold */
 }
+
+/* Further Increase Stall Number Size */
+.stall-number {
+    font-size: 2rem !important; /* Huge (~32px) */
+    font-weight: 900 !important;
+}
