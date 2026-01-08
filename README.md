@@ -1,5 +1,7 @@
 # Shri Vishwakarma Business Expo 2026 - Stall Booking System
 
+**Live Site:** [https://svkbe2026.onrender.com/](https://svkbe2026.onrender.com/)
+
 ## 📌 Project Overview
 The **Shri Vishwakarma Business Expo 2026** portal is a comprehensive web application designed to facilitate the digital booking of exhibition stalls. It offers an interactive visual map of the expo hall, allowing exhibitors to view stall availability, pricing, and categories in real-time. The system streamlines the entire process from user registration and booking requests to admin approval and confirmation.
 
@@ -63,6 +65,10 @@ We chose a robust, scalable, and simple technology stack to ensure performance a
    MONGODB_URI=your_mongodb_atlas_connection_string
    ADMIN_USERNAME=admin
    ADMIN_PASSWORD=your_secure_password
+   
+   # Optional: Email Configuration
+   # MAIL_USERNAME=your_email_address
+   # MAIL_PASSWORD=your_app_password
    ```
 
 5. **Run the Application**:

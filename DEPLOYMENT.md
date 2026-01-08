@@ -54,15 +54,15 @@ Render does NOT read your `.env` file for security. You must add the variables m
 
     | Key | Value |
     | :--- | :--- |
-    | `MONGODB_URI` | `mongodb+srv://vanshkm123_db_user:Vansh%401010@cluster0.5qq3one.mongodb.net/` |
-    | `ADMIN_USERNAME` | `admin` |
-    | `ADMIN_PASSWORD` | `nexus2026` (or your preferred password) |
+    | `MONGODB_URI` | `your_mongodb_atlas_connection_string` |
+    | `ADMIN_USERNAME` | `admin_username` |
+    | `ADMIN_PASSWORD` | `svkbe2026` (or your preferred password) |
     | `PYTHON_VERSION` | `3.11.5` (Optional, ensures compatibility) |
 
 ## Step 5: Finish
 1.  Click **Create Web Service**.
 2.  Render will start building your app. It may take 2-3 minutes.
-3.  Once the build is successful, you will see a green "Live" badge and your URL (e.g., `https://expo-2026.onrender.com`).
+3.  Once the build is successful, you will see a green "Live" badge and your URL (e.g., `https://svkbe2026.onrender.com/`).
 4.  Click the URL to visit your live site!
 
 ## Troubleshooting

@@ -553,7 +553,7 @@ def get_stats():
     })
 
 if __name__ == '__main__':
-    print("🎪 Nexus Fair Server Running (MongoDB Edition)")
+    print("🎪 SVKBE 2026 Server Running (MongoDB Edition)")
     print("📍 Main Site: http://localhost:8080")
     print("🔐 Admin Panel: http://localhost:8080/admin")
     print("━" * 40)
