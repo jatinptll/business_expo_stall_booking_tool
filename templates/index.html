@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shri Vishwakarma Business Expo 2026</title>
+    <meta name="description"
+        content="Book your stall at Shri Vishwakarma Business Expo 2026. Browse available stalls and reserve your spot today.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎪</text></svg>">
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">
+                <span class="brand-icon">🎪</span>
+                <div class="brand-text">
+                    <span class="brand-name">Shri Vishwakarma Business Expo</span>
+                    <span class="brand-year">2026</span>
+                </div>
+            </a>
+
+            <div class="navbar-actions">
+                <div id="user-logged-in" class="user-section hidden">
+                    <span id="user-welcome">Welcome!</span>
+                    <button id="my-bookings-btn" class="btn-ghost">My Bookings</button>
+                    <button id="logout-btn" class="btn-ghost">Logout</button>
+                </div>
+                <div id="user-logged-out" class="auth-buttons">
+                    <button id="signup-btn" class="btn-primary-sm">Sign Up</button>
+                    <button id="login-btn" class="btn-ghost">Login</button>
+                </div>
+                <a href="/admin" class="admin-link">Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <section class="hero">
+            <h1>Business Expo Hall Layout</h1>
+            <p>Browse available stalls and book your spot. Click any stall for details.</p>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <span class="dot available"></span>
+                    <span>Available</span>
+                </div>
+                <div class="legend-item">
+                    <span class="dot pending"></span>
+                    <span>Pending Approval</span>
+                </div>
+                <div class="legend-item">
+                    <span class="dot confirmed"></span>
+                    <span>Booked</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="hall-layout">
+            <div class="hall-header">
+                <span class="hall-title">MAIN EXHIBITION HALL</span>
+            </div>
+            <div id="stalls-grid" class="stalls-grid">
+                <!-- Stalls rendered by JS -->
+            </div>
+        </section>
+    </main>
+
+    <!-- AUTH MODAL (Login / Register) -->
+    <div id="auth-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content auth-modal-content">
+            <div id="auth-context" class="auth-context hidden">
+                <span>Booking Stall <strong id="auth-context-stall">#--</strong></span>
+            </div>
+            <button class="modal-close">&times;</button>
+
+            <!-- LOGIN VIEW -->
+            <div id="login-view" class="auth-view">
+                <h2>Welcome Back</h2>
+                <p>Sign in to your account</p>
+
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" required placeholder="you@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn-primary btn-full">Sign In</button>
+                </form>
+
+                <div class="auth-switch">
+                    <span>Don't have an account?</span>
+                    <button id="switch-to-register" class="btn-link">Register Now</button>
+                </div>
+            </div>
+
+            <!-- REGISTER VIEW -->
+            <div id="register-view" class="auth-view hidden">
+                <h2>Create Account</h2>
+                <p>Register to book stalls</p>
+
+                <form id="register-form" class="auth-form single-column">
+                    <div class="form-group">
+                        <label for="regName">Full Name *</label>
+                        <input type="text" id="regName" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="regCompany">Company Name *</label>
+                        <input type="text" id="regCompany" required placeholder="ABC Corp">
+                    </div>
+                    <div class="form-group">
+                        <label for="regEmail">Email *</label>
+                        <input type="email" id="regEmail" required placeholder="you@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="regPhone">Phone *</label>
+                        <input type="tel" id="regPhone" required placeholder="+91-9876543210">
+                    </div>
+                    <div class="form-group">
+                        <label for="regCategory">Business Category *</label>
+                        <select id="regCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Fashion">Fashion & Apparel</option>
+                            <option value="Food">Food & Beverages</option>
+                            <option value="Services">Services</option>
+                            <option value="Manufacturing">Manufacturing</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="regPassword">Password *</label>
+                        <input type="password" id="regPassword" required minlength="6" placeholder="Min 6 characters">
+                    </div>
+                    <button type="submit" class="btn-primary btn-full">Create Account</button>
+                </form>
+
+                <div class="auth-switch">
+                    <span>Already have an account?</span>
+                    <button id="switch-to-login" class="btn-link">Sign In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STALL INFO MODAL (For Available Stalls) -->
+    <div id="stall-available-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content stall-modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="stall-modal-header available-header">
+                <span class="stall-badge-lg">AVAILABLE</span>
+                <h2 id="avail-stall-title">Stall #--</h2>
+            </div>
+            <div class="stall-modal-body">
+                <div class="stall-info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Type</span>
+                        <span class="info-value" id="avail-stall-type">Standard</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Price</span>
+                        <span class="info-value price" id="avail-stall-price">$500</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Size</span>
+                        <span class="info-value" id="avail-stall-size">10' x 10'</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Location</span>
+                        <span class="info-value" id="avail-stall-location">Main Hall</span>
+                    </div>
+                </div>
+                <button id="book-this-stall-btn" class="btn-primary btn-full btn-lg">
+                    Book This Stall
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOOKED STALL INFO MODAL -->
+    <div id="stall-booked-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content stall-modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="stall-modal-header booked-header">
+                <span class="stall-badge-lg booked">BOOKED</span>
+                <h2 id="booked-stall-title">Stall #--</h2>
+            </div>
+            <div class="stall-modal-body">
+                <div class="booking-details">
+                    <div class="detail-row">
+                        <span class="detail-label">Company</span>
+                        <span class="detail-value" id="booked-company">--</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Contact Person</span>
+                        <span class="detail-value" id="booked-contact">--</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Contact Person</span>
+                        <span class="detail-value" id="booked-contact">--</span>
+                    </div>
+                    <!-- Phone removed for privacy -->
+                    <div class="detail-row">
+                        <span class="detail-label">Category</span>
+                        <span class="detail-value" id="booked-category">--</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Booked On</span>
+                        <span class="detail-value" id="booked-date">--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PENDING STALL MODAL -->
+    <div id="stall-pending-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content stall-modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="stall-modal-header pending-header">
+                <span class="stall-badge-lg pending">PENDING</span>
+                <h2 id="pending-stall-title">Stall #--</h2>
+            </div>
+            <div class="stall-modal-body">
+                <div class="pending-message">
+                    <div class="pending-icon">⏳</div>
+                    <p>This stall has a booking request pending admin approval.</p>
+                    <p class="pending-company" id="pending-company">Requested by: --</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOOKING REQUEST MODAL -->
+    <div id="booking-request-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content booking-modal-content">
+            <button class="modal-close">&times;</button>
+            <h2>Submit Booking Request</h2>
+            <p id="booking-stall-info">Stall #-- • Type • $Price</p>
+
+            <form id="booking-request-form" class="auth-form">
+                <div class="form-group">
+                    <label for="bookingCategory">Business Category for this Stall</label>
+                    <select id="bookingCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Fashion">Fashion & Apparel</option>
+                        <option value="Food">Food & Beverages</option>
+                        <option value="Services">Services</option>
+                        <option value="Manufacturing">Manufacturing</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Pharma">Pharma</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div id="other-category-container" class="form-group hidden">
+                    <label for="otherCategoryInput">Specify Category *</label>
+                    <input type="text" id="otherCategoryInput" placeholder="Enter business category">
+                </div>
+                <div class="form-group">
+                    <label for="bookingReference">Booked By (Reference) *</label>
+                    <select id="bookingReference" required>
+                        <option value="">Select Person</option>
+                        <option value="Niravbhai J Mevada">Niravbhai J Mevada</option>
+                        <option value="Girishbhai">Girishbhai</option>
+                        <option value="GP">GP</option>
+                        <option value="Sandip A Mevada">Sandip A Mevada</option>
+                        <option value="Ankit Mevada">Ankit Mevada</option>
+                        <option value="Jitubhai">Jitubhai</option>
+                        <option value="Vijaybhai">Vijaybhai</option>
+                        <option value="Mayur H Suthar">Mayur H Suthar</option>
+                        <option value="Rajanikant Mevada">Rajanikant Mevada</option>
+                        <option value="Atul G. Suthar">Atul G. Suthar</option>
+                    </select>
+                </div>
+                <div class="form-note">
+                    <strong>Note:</strong> Your booking request will be sent for admin approval.
+                    You will be notified once it's confirmed.
+                </div>
+                <button type="submit" class="btn-primary btn-full btn-lg">
+                    <span class="btn-text">Submit Booking Request</span>
+                    <span class="btn-loader hidden">Submitting...</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MY BOOKINGS MODAL -->
+    <div id="my-bookings-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content my-bookings-modal-content">
+            <button class="modal-close">&times;</button>
+            <h2>My Bookings</h2>
+            <div id="my-bookings-content" class="my-bookings-content">
+                <!-- Content loaded by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="toast hidden">
+        <div class="toast-content">
+            <span id="toast-icon">✓</span>
+            <span id="toast-message">Notification</span>
+        </div>
+    </div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+
+</html>
