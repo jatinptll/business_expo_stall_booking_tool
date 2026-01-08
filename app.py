@@ -3,6 +3,7 @@ import json
 import uuid
 from datetime import datetime, timedelta
 from flask import Flask, render_template, request, jsonify, session
+from flask_mail import Mail, Message
 
 def get_ist_time():
     """Returns current time in IST (UTC + 5:30)"""
@@ -17,6 +18,15 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "super_secret_session_key_fixed_2026")
 app.permanent_session_lifetime = timedelta(hours=2)
+
+'''
+# === EMAIL CONFIG ===
+app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER', 'smtp.gmail.com')
+app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', 587))
+app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS', 'true').lower() == 'true'
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+mail = Mail(app)'''
 
 # === MONGODB CONNECTION ===
 MONGO_URI = os.getenv("MONGODB_URI")
@@ -89,6 +99,41 @@ def home():
 @app.route('/admin')
 def admin_panel():
     return render_template('admin.html')
+
+'''
+def send_confirmation_email(booking_data):
+    """Sends a confirmation email to the user."""
+    try:
+        if not app.config['MAIL_USERNAME'] or not app.config['MAIL_PASSWORD']:
+            print("⚠️ Email credentials missing. Skipping email.")
+            return
+
+        msg = Message(
+            subject=f"Booking Confirmed! Stall #{booking_data['stall_id']}",
+            sender=app.config['MAIL_USERNAME'],
+            recipients=[booking_data['user_email']]
+        )
+        msg.body = f"""Hello {booking_data['contact_person']},
+
+Great news! Your booking request for Stall #{booking_data['stall_id']} has been confirmed.
+
+Details:
+Stall: #{booking_data['stall_id']} ({booking_data['stall_type']})
+Company: {booking_data['company_name']}
+Price: INR {booking_data['stall_price']}
+Category: {booking_data['category']}
+Confirmed On: {booking_data['confirmed_at']}
+
+You can view your confirmed booking on the website.
+
+Best regards,
+Shri Vishwakarma Business Expo Admin
+"""
+        mail.send(msg)
+        print(f"✅ Email sent to {booking_data['user_email']}")
+    except Exception as e:
+        print(f"❌ Failed to send email: {e}")
+        '''
 
 # === PUBLIC ENDPOINTS (No Auth Required) ===
 
@@ -408,7 +453,7 @@ def confirm_booking(request_id):
         {"request_id": request_id},
         {"$set": {
             "status": "confirmed",
-            "confirmed_at": datetime.now().isoformat()
+            "confirmed_at": get_ist_time().isoformat()
         }}
     )
     
@@ -418,6 +463,10 @@ def confirm_booking(request_id):
         {"$push": {"bookings": stall_id}}
     )
     
+    
+    # Send Email
+    # send_confirmation_email(booking_data)
+
     return jsonify({'success': True, 'message': f'Stall {stall_id} booking confirmed'})
 
 @app.route('/api/admin/reject-booking/<request_id>', methods=['POST'])

@@ -175,7 +175,7 @@ function getStallPosition(id) {
     // Col 9 (100-119, Top to Bottom)
     // Gaps between 105 & 106, 113 & 114.
     if (id <= 119) {
-        let baseRow = START_ROW + (id - 100);
+        let baseRow = START_ROW + (id - 100) + 1; // +1 to align with Left Col spacing
 
         // Apply Gaps (shift down, so increase row index)
         if (id > 105) baseRow += 1; // Gap after 105 (before 106)
@@ -240,7 +240,7 @@ function renderMap() {
     exitGap3.className = 'map-label exit-marker';
     exitGap3.textContent = 'E. EXIT';
     exitGap3.style.gridColumn = '9';
-    exitGap3.style.gridRow = '10'; // Between 105 & 106
+    exitGap3.style.gridRow = '11'; // Between 105 & 106 (Shifted +1)
     exitGap3.style.fontSize = '1rem';
     exitGap3.style.background = 'transparent';
     exitGap3.style.color = 'black';
@@ -251,7 +251,7 @@ function renderMap() {
     exitGap4.className = 'map-label exit-marker';
     exitGap4.textContent = 'E. EXIT';
     exitGap4.style.gridColumn = '9';
-    exitGap4.style.gridRow = '19'; // Between 113 & 114
+    exitGap4.style.gridRow = '20'; // Between 113 & 114 (Shifted +1)
     exitGap4.style.fontSize = '1rem';
     exitGap4.style.background = 'transparent';
     exitGap4.style.color = 'black';

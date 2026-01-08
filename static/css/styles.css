@@ -1112,14 +1112,172 @@ body {
         margin: 0 0.5rem;
     }
 }
+
 /* Increase Stall Number Size Globally */
 .stall-number {
-    font-size: 1.5rem; /* ~24px */
-    font-weight: 800;  /* Bold */
+    font-size: 1.5rem;
+    /* ~24px */
+    font-weight: 800;
+    /* Bold */
 }
 
 /* Further Increase Stall Number Size */
 .stall-number {
-    font-size: 2rem !important; /* Huge (~32px) */
+    font-size: 2rem !important;
+    /* Huge (~32px) */
     font-weight: 900 !important;
+}
+
+/* Price Table Styles (Premium) */
+.price-info-section {
+    max-width: 900px;
+    margin: 4rem auto;
+    padding: 0 1.5rem;
+}
+
+.price-info-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
+    background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+.price-table-container {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+.price-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--text-primary);
+    border: none;
+    font-size: 1rem;
+}
+
+.price-table th {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.25rem 1.5rem;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.price-table td {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    vertical-align: middle;
+}
+
+.price-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.price-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* Category Indicators */
+.price-table td:first-child {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.price-table td:first-child::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 12px currentColor;
+}
+
+.cat-sapphire td:first-child {
+    color: #ff4d4d;
+}
+
+.cat-sapphire td:first-child::before {
+    background: #ff4d4d;
+    color: #ff4d4d;
+}
+
+.cat-diamond td:first-child {
+    color: #e2e8f0;
+}
+
+.cat-diamond td:first-child::before {
+    background: #e2e8f0;
+    color: #e2e8f0;
+}
+
+.cat-platinum td:first-child {
+    color: #d4a373;
+}
+
+.cat-platinum td:first-child::before {
+    background: #d4a373;
+    color: #d4a373;
+}
+
+.cat-gold td:first-child {
+    color: #fbbf24;
+}
+
+.cat-gold td:first-child::before {
+    background: #fbbf24;
+    color: #fbbf24;
+}
+
+.cat-silver td:first-child {
+    color: #facc15;
+}
+
+.cat-silver td:first-child::before {
+    background: #facc15;
+    color: #facc15;
+}
+
+.cat-bronze td:first-child {
+    color: #f472b6;
+}
+
+.cat-bronze td:first-child::before {
+    background: #f472b6;
+    color: #f472b6;
+}
+
+.cat-standard td:first-child {
+    color: #86efac;
+}
+
+.cat-standard td:first-child::before {
+    background: #86efac;
+    color: #86efac;
+}
+
+.price-table tfoot {
+    background: rgba(255, 255, 255, 0.02);
+    font-weight: 700;
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.price-table tfoot td {
+    border: none;
+    color: var(--text-primary);
+    padding: 1.5rem;
+    font-size: 1.1rem;
 }
