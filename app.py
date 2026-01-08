@@ -3,6 +3,10 @@ import json
 import uuid
 from datetime import datetime, timedelta
 from flask import Flask, render_template, request, jsonify, session
+
+def get_ist_time():
+    """Returns current time in IST (UTC + 5:30)"""
+    return datetime.utcnow() + timedelta(hours=5, minutes=30)
 from werkzeug.security import generate_password_hash, check_password_hash
 from pymongo import MongoClient
 from dotenv import load_dotenv
@@ -22,7 +26,7 @@ try:
     import certifi
     if not MONGO_URI:
         raise ValueError("MONGODB_URI is not set in .env")
-    client = MongoClient(MONGO_URI, tlsCAFile=certifi.where(), serverSelectionTimeoutMS=2000)
+    client = MongoClient(MONGO_URI, tlsCAFile=certifi.where(), serverSelectionTimeoutMS=10000, connectTimeoutMS=10000)
     # Test connection
     client.server_info()
     db = client.EXPO_2026
@@ -105,6 +109,7 @@ def get_stalls():
             'contact_person': b.get('contact_person', ''),
             # Phone removed for privacy
             'category': b.get('category', ''),
+            'company_website': b.get('company_website', 'NA'),
             'confirmed_at': b.get('confirmed_at', '')
         }
     
@@ -138,6 +143,7 @@ def get_stall_details(stall_id):
             'contact_person': booking.get('contact_person', ''),
             # Phone removed for privacy
             'category': booking.get('category', ''),
+            'company_website': booking.get('company_website', 'NA'),
             'confirmed_at': booking.get('confirmed_at', '')
         })
     
@@ -289,9 +295,10 @@ def submit_booking_request():
         'company': user['company'],
         'phone': user['phone'],
         'category': data.get('category', ''),
+        'company_website': data.get('company_website', 'NA'),
         'booked_by': data.get('booked_by', ''),
         'status': 'pending',
-        'requested_at': datetime.now().isoformat()
+        'requested_at': get_ist_time().isoformat()
     }
     
     db.requests.insert_one(request_data)
@@ -348,7 +355,6 @@ def get_pending_requests():
     # Return as dict for frontend compatibility (or list if FE can handle it, 
     # but existing code expects object with ID keys? 
     # Actually the current frontend expects an object {req_id: {...}}.
-    # Let's verify... `Object.entries(pendingRequests)` in FE.
     # So we need to return a dictionary keyed by request_id.
     
     requests_list = list(db.requests.find({"status": "pending"}, {'_id': 0}))
@@ -387,10 +393,11 @@ def confirm_booking(request_id):
         'contact_person': req['name'],
         'phone': req['phone'],
         'category': req['category'],
+        'company_website': req.get('company_website', 'NA'),
         'booked_by': req.get('booked_by', ''),
         'stall_type': req.get('stall_type', 'Standard'),
         'stall_price': req.get('stall_price', 500),
-        'confirmed_at': datetime.now().isoformat(),
+        'confirmed_at': get_ist_time().isoformat(),
         'confirmed_by': session['admin']['username']
     }
     

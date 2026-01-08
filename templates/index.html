@@ -211,18 +211,15 @@
                         <span class="detail-value" id="booked-contact">--</span>
                     </div>
                     <div class="detail-row">
-                        <span class="detail-label">Contact Person</span>
-                        <span class="detail-value" id="booked-contact">--</span>
+                        <span class="detail-label">Website</span>
+                        <span class="detail-value" id="booked-website">--</span>
                     </div>
                     <!-- Phone removed for privacy -->
                     <div class="detail-row">
                         <span class="detail-label">Category</span>
                         <span class="detail-value" id="booked-category">--</span>
                     </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Booked On</span>
-                        <span class="detail-value" id="booked-date">--</span>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -275,6 +272,10 @@
                     <input type="text" id="otherCategoryInput" placeholder="Enter business category">
                 </div>
                 <div class="form-group">
+                    <label for="bookingWebsite">Company Website URL *</label>
+                    <input type="text" id="bookingWebsite" required placeholder="example.com or NA">
+                </div>
+                <div class="form-group">
                     <label for="bookingReference">Booked By (Reference) *</label>
                     <select id="bookingReference" required>
                         <option value="">Select Person</option>
@@ -293,6 +294,9 @@
                 <div class="form-note">
                     <strong>Note:</strong> Your booking request will be sent for admin approval.
                     You will be notified once it's confirmed.
+                    <br><br>
+                    If your company does not have a website, please write <strong>NA</strong> (or na) in the Website
+                    field, otherwise submission will fail.
                 </div>
                 <button type="submit" class="btn-primary btn-full btn-lg">
                     <span class="btn-text">Submit Booking Request</span>

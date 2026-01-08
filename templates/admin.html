@@ -162,6 +162,18 @@
             background: rgba(255, 255, 255, 0.02);
         }
 
+        .data-table td a {
+            color: #38bdf8;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .data-table td a:hover {
+            color: #7dd3fc;
+            text-decoration: underline;
+        }
+
         .action-btn {
             padding: 0.4rem 0.75rem;
             border: none;
@@ -170,7 +182,6 @@
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
-            margin-right: 0.5rem;
         }
 
         .action-btn.confirm {
@@ -321,6 +332,7 @@
                             <th>Company</th>
                             <th>Contact</th>
                             <th>Phone</th>
+                            <th>Website</th>
                             <th>Category</th>
                             <th>Booked By</th>
                             <th>Requested</th>
@@ -340,6 +352,7 @@
                             <th>Company</th>
                             <th>Contact</th>
                             <th>Phone</th>
+                            <th>Website</th>
                             <th>Category</th>
                             <th>Booked By</th>
                             <th>Confirmed</th>
@@ -462,12 +475,15 @@
                     <td>${r.company}</td>
                     <td>${r.name}</td>
                     <td>${r.phone}</td>
+                    <td><a href="${r.company_website && r.company_website !== 'NA' ? 'http://' + r.company_website.replace(/^https?:\/\//, '') : '#'}" target="_blank">${r.company_website || '-'}</a></td>
                     <td>${r.category || '-'}</td>
                     <td>${r.booked_by || '-'}</td>
                     <td>${formatDate(r.requested_at)}</td>
                     <td>
-                        <button class="action-btn confirm" onclick="confirmBooking('${reqId}')">✓ Confirm</button>
-                        <button class="action-btn reject" onclick="rejectBooking('${reqId}')">✕ Reject</button>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="action-btn confirm" onclick="confirmBooking('${reqId}')">✓ Confirm</button>
+                            <button class="action-btn reject" onclick="rejectBooking('${reqId}')">✕ Reject</button>
+                        </div>
                     </td>
                 </tr>
             `).join('');
@@ -491,12 +507,15 @@
                     <td>${b.company_name}</td>
                     <td>${b.contact_person}</td>
                     <td>${b.phone}</td>
+                    <td><a href="${b.company_website && b.company_website !== 'NA' ? 'http://' + b.company_website.replace(/^https?:\/\//, '') : '#'}" target="_blank">${b.company_website || '-'}</a></td>
                     <td>${b.category || '-'}</td>
                     <td>${b.booked_by || '-'}</td>
                     <td>${formatDate(b.confirmed_at)}</td>
                     <td>${b.confirmed_by || '-'}</td>
                     <td>
-                        <button class="action-btn cancel" onclick="cancelBooking('${stallId}')">Cancel</button>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="action-btn cancel" onclick="cancelBooking('${stallId}')">Cancel</button>
+                        </div>
                     </td>
                 </tr>
             `).join('');
@@ -577,9 +596,9 @@
                 return;
             }
 
-            let csv = 'Stall,Company,Contact,Email,Phone,Category,BookedBy,Price,ConfirmedAt,ConfirmedBy\n';
+            let csv = 'Stall,Company,Contact,Email,Phone,Website,Category,BookedBy,Price,ConfirmedAt,ConfirmedBy\n';
             entries.forEach(([stallId, b]) => {
-                csv += `${stallId},"${b.company_name}","${b.contact_person}","${b.user_email}","${b.phone}","${b.category || ''}","${b.booked_by || ''}",${b.stall_price || 21000},"${b.confirmed_at}","${b.confirmed_by}"\n`;
+                csv += `${stallId},"${b.company_name}","${b.contact_person}","${b.user_email}","${b.phone}","${b.company_website || 'NA'}","${b.category || ''}","${b.booked_by || ''}",${b.stall_price || 21000},"${b.confirmed_at}","${b.confirmed_by}"\n`;
             });
 
             const blob = new Blob([csv], { type: 'text/csv' });

@@ -351,9 +351,10 @@ function openBookedModal(stallId, data) {
     document.getElementById('booked-stall-title').textContent = `Stall #${stallId}`;
     document.getElementById('booked-company').textContent = data.company_name || '--';
     document.getElementById('booked-contact').textContent = data.contact_person || '--';
+    document.getElementById('booked-website').textContent = data.company_website || 'NA';
     // Phone Removed
     document.getElementById('booked-category').textContent = data.category || '--';
-    document.getElementById('booked-date').textContent = formatDate(data.confirmed_at);
+
 
     stallBookedModal.classList.remove('hidden');
 }
@@ -607,6 +608,14 @@ async function handleBookingRequest(e) {
     }
 
     const bookedBy = document.getElementById('bookingReference').value;
+    const companyWebsite = document.getElementById('bookingWebsite').value.trim();
+
+    if (!companyWebsite) {
+        showToast('Please enter company website or NA', 'warning');
+        btn.classList.remove('loading');
+        btn.disabled = false;
+        return;
+    }
 
     try {
         const res = await fetch('/api/booking-request', {
@@ -617,7 +626,8 @@ async function handleBookingRequest(e) {
                 stall_type: selectedStall.config.name,
                 stall_price: selectedStall.config.price,
                 category,
-                booked_by: bookedBy
+                booked_by: bookedBy,
+                company_website: companyWebsite
             })
         });
 
