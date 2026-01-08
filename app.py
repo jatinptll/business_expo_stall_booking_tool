@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
+app.secret_key = os.getenv("SECRET_KEY", "super_secret_session_key_fixed_2026")
 app.permanent_session_lifetime = timedelta(hours=2)
 
 # === MONGODB CONNECTION ===
