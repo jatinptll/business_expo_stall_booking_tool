@@ -266,17 +266,26 @@ body {
     color: var(--text-secondary);
 }
 
+.stalls-scroll-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    background: #fff;
+}
+
 .stalls-grid {
     display: grid;
     grid-template-columns: repeat(9, 1fr);
     /* 9 column layout */
     gap: 0.4rem;
     padding: 2rem;
-    background: #fff;
-    /* White background as per image */
+    background: transparent;
     color: #000;
     min-width: 800px;
-    overflow-x: auto;
+    transform: rotate(180deg);
+}
+
+.stalls-grid>* {
+    transform: rotate(180deg);
 }
 
 .map-label {
@@ -322,8 +331,10 @@ body {
 }
 
 .stall-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow);
+    transform: rotate(180deg) scale(1.05);
+    /* Slight zoom, no movement */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    z-index: 10;
 }
 
 /* Category Variants */
